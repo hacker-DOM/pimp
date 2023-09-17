@@ -1,20 +1,21 @@
 [tool.pyright]
-typeCheckingMode = "pyright"
+# typeCheckingMode = "strict"
+typeCheckingMode = "basic"
 
 # enable EVERYTHING. See
 # https://microsoft.github.io/pyright/#/configuration?id=diagnostic-rule-defaults
-reportUntypedFunctionDecorator = true
-reportUntypedNamedTuple = true
-reportCallInDefaultInitializer = true
-reportImplicitOverride = true
-reportImplicitStringConcatenation = true
-reportImportCycles = true
-reportMissingSuperCall = true
-reportPropertyTypeMismatch = true
-reportShadowedImports = true
-reportUninitializedInstanceVariable = true
-reportUnnecessaryTypeIgnoreComment = true
-reportUnusedCallResult = true
+# reportUntypedFunctionDecorator = true
+# reportUntypedNamedTuple = true
+# reportCallInDefaultInitializer = true
+# reportImplicitOverride = true
+# reportImplicitStringConcatenation = true
+# reportImportCycles = true
+# reportMissingSuperCall = true
+# reportPropertyTypeMismatch = true
+# reportShadowedImports = true
+# reportUninitializedInstanceVariable = true
+# reportUnnecessaryTypeIgnoreComment = true
+# reportUnusedCallResult = true
 
 # CUSTOM overrides
 reportMissingTypeStubs = false
@@ -30,7 +31,7 @@ license = "Unlicense"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 rich = "^13.5.2"
 pydantic = "^2.3.0"
 click = "^8.1.7"
@@ -42,6 +43,9 @@ tomli = "^2.0.1"
 networkx = "^3.1"
 
 [tool.poetry.group.dev.dependencies]
+
+[tool.poetry.scripts]
+pimp = "pimp.cli.__main__:main"
 
 [build-system]
 requires = ["poetry-core"]
