@@ -1,6 +1,7 @@
 from pimp.common import *
 
 from .lsp import run_lsp
+from .ts import run_ts
 
 console = rich.console.Console()
 
@@ -39,3 +40,4 @@ def main(ctx: click.core.Context, debug: bool, profile: bool) -> None:
 
 
 main.add_command(run_lsp)
+main.add_command(run_ts)
