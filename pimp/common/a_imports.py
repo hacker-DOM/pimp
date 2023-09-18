@@ -53,6 +53,8 @@ from functools import partial
 import decimal
 from decimal import Decimal
 import platform
+import json
+from enum import IntEnum
 
 import asyncio
 

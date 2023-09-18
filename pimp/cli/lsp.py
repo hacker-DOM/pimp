@@ -1,4 +1,8 @@
 from pimp.common import *
+import pimp.lsp.woke.rpc_protocol as rpc_protocol
+import pimp.lsp.woke.protocol_structures as protocol_structures
+import pimp.lsp.woke.common_structures as common_structures
+import pimp.lsp.woke.methods as methods
 
 import rich_click as click
 
@@ -54,6 +58,31 @@ def run_lsp(ctx: click.core.Context):
     ...
 
 
+async def connect_to_server():
+    reader, writer = await asyncio.open_connection('127.0.0.1', 65433)
+    rpc = rpc_protocol.RpcProtocol(reader, writer)
+    init_request = protocol_structures.RequestMessage(
+        jsonrpc="2.0",
+        id=1,
+        method=methods.RequestMethodEnum("initialize"),
+        # params={
+        #     # Add necessary parameters for the initialization request here
+        #     # Refer to the LSP specification for the required fields
+        # }
+        params=common_structures.InitializeParams(
+            capabilities=common_structures.ClientCapabilities()
+        )
+    )
+
+    await rpc.send(init_request)
+    response = await rpc.receive()
+    print(response)
+    writer.close()
+    await writer.wait_closed()
+
+
+
+
 @run_lsp.command(name="shell")
 # @click.option("--language", "--lang", default="english", help="Mnemonic language")
 # @click.argument("alias")
@@ -65,3 +94,4 @@ def lsp_shell(
     Start the LSP shell.
     """
     print("lsp shell")
+    asyncio.run(connect_to_server())

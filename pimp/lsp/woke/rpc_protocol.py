@@ -1,7 +1,4 @@
-import asyncio
-import collections
-import json
-from typing import Optional, Union
+from pimp.common import *
 
 from .protocol_structures import (
     NotificationMessage,
